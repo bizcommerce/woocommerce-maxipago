@@ -35,8 +35,13 @@ $fields = wp_parse_args($fields, apply_filters('woocommerce_credit_card_form_fie
         do_action('woocommerce_credit_card_form_start', $this->id);
         foreach ($fields as $key => $field) {
             if(strpos($request_uri,'add-payment-method') !== false &&
-                ($key == 'card-installments-field' || $key == 'card-holder-name-field' || $key == 'card-cvc-field')) continue;
-            echo $field;
+                ($key == 'card-installments-field' || $key == 'card-holder-name-field' || $key == 'card-cvc-field')) {
+                continue;
+            } elseif($key == 'card-installments-field' && $this->installments == 1) {
+                echo '<input type="hidden" name="maxipago_installments" value="1"/>';
+            } else {
+                echo $field;
+            }
         }
         do_action('woocommerce_credit_card_form_end', $this->id);
     ?>

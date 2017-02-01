@@ -244,6 +244,9 @@ class WC_maxiPago_CC_API extends WC_maxiPago_API {
             $expiry = $this->get_cc_expiration(sanitize_text_field($post['maxipago_card_expiry']));
             $cc_number = sanitize_text_field($this->clean_number($post['maxipago_card_number']));
             $cc_installments = sanitize_text_field($this->clean_number($post['maxipago_installments']));
+
+            if($this->gateway->installments == 1) $cc_installments = 1;
+
             $cc_brand = $this->get_cc_brand($cc_number);
             $processor_id = $this->get_processor_id_by_cc_brand($cc_brand);
 
