@@ -119,4 +119,14 @@ abstract class WC_maxiPago_API {
         return isset($banks[$type]) ? $banks[$type] : array();
     }
 
+    public function clean_ip_address($ipAddress) {
+        if (strpos($ipAddress, ':') !== false) {
+            $ipAddress = str_replace(array('http://', 'https://'), '', $ipAddress);
+            $ipAddress = explode(':', $ipAddress);
+            $ipAddress = $ipAddress[0];
+        }
+
+        return $ipAddress;
+    }
+
 }

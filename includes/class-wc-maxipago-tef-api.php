@@ -36,10 +36,12 @@ class WC_maxiPago_TEF_API extends WC_maxiPago_API {
             $client->setCredentials($this->gateway->merchant_id, $this->gateway->merchant_key);
             $client->setEnvironment($this->gateway->environment);
 
+            $ipAddress = $this->clean_ip_address($order->customer_ip_address);
+
             $request_data = array(
                 'referenceNum' => $this->gateway->invoice_prefix . $order->id,
                 'processorID' => $tef_bank,
-                'ipAddress' => $order->customer_ip_address,
+                'ipAddress' => $ipAddress,
 
                 'bmail' => $order->billing_email,
                 'bname' => $order->billing_first_name . ' ' . $order->billing_last_name,

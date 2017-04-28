@@ -22,7 +22,7 @@ if (!class_exists('WC_maxiPago')) :
 
     class WC_maxiPago {
 
-        const VERSION = '0.2.1';
+        const VERSION = '0.2.2';
 
         protected static $instance = null;
 

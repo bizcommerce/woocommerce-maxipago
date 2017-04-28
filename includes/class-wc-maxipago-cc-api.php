@@ -260,10 +260,12 @@ class WC_maxiPago_CC_API extends WC_maxiPago_API {
                 $charge_total = $this->get_total_by_installments($charge_total, $cc_installments, $this->gateway->interest_rate);
             }
 
+            $ipAddress = $this->clean_ip_address($order->customer_ip_address);
+
             $request_data = array(
                 'referenceNum' => $this->gateway->invoice_prefix . $order->id,
                 'processorID' => $processor_id,
-                'ipAddress' => $order->customer_ip_address,
+                'ipAddress' => $ipAddress,
                 'fraudCheck' => $fraud_check,
 
                 'bmail' => $order->billing_email,

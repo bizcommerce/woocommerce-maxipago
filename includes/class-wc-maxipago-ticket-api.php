@@ -34,10 +34,12 @@ class WC_maxiPago_Ticket_API extends WC_maxiPago_API {
             $date->modify("{$this->gateway->days_to_expire} days");
             $expiration_date = $date->format('Y-m-d');
 
+            $ipAddress = $this->clean_ip_address($order->customer_ip_address);
+
             $request_data = array(
                 'referenceNum' => $this->gateway->invoice_prefix . $order->id,
                 'processorID' => $this->gateway->bank,
-                'ipAddress' => $order->customer_ip_address,
+                'ipAddress' => $ipAddress,
 
                 'bmail' => $order->billing_email,
                 'bname' => $order->billing_first_name . ' ' . $order->billing_last_name,
